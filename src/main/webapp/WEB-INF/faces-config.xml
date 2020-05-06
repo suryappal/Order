@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    
+    <name>primefaces_omega</name>
+    
+    <component>
+        <component-type>org.primefaces.component.OmegaMenu</component-type>
+        <component-class>org.primefaces.omega.component.menu.OmegaMenu</component-class>
+    </component>
+    
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.OmegaMenuRenderer</renderer-type>
+            <renderer-class>org.primefaces.omega.component.menu.OmegaMenuRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+    <navigation-rule>
+        <from-view-id>/Product/ProductList.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ProductAdd</from-outcome>
+            <to-view-id>/Product/ProductAdd.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ProductList</from-outcome>
+            <to-view-id>/Product/ProductList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ProductEdit</from-outcome>
+            <to-view-id>/Product/ProductEdit.xhtml</to-view-id>
+            <redirect include-view-params="true">
+                <view-param>
+                    <name>productid</name>
+                    <value>#{productList.selectedProductDTO.id}</value>
+                </view-param>
+            </redirect>
+        </navigation-case>        
+    </navigation-rule>    
+    <navigation-rule>
+        <from-view-id>/Product/ProductEdit.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ProductList</from-outcome>
+            <to-view-id>/Product/ProductList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>        
+    </navigation-rule>    
+    <navigation-rule>
+        <from-view-id>/Product/ProductAdd.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ProductList</from-outcome>
+            <to-view-id>/Product/ProductList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ProductAdd</from-outcome>
+            <to-view-id>/Product/ProductAdd.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule> 
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>LoginSucccess</from-outcome>
+            <to-view-id>/landing.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>LoginFailure</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

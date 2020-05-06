@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+                    
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{productList.fillProductValues()}"></f:viewAction>
+        </f:metadata>
+        <br />
+        <h:form id="addproduct">
+            <p:button styleClass="purple-button" value="Add New Product" outcome="ProductAdd" />
+        </h:form>
+        <br />
+        <h:form id="productlistgrid" style="text-align: center">
+            <p:dataTable var="product" value="#{productList.productDTOList}">
+                <p:column headerText="Product ID">
+                    <h:outputText value="#{product.productID}"></h:outputText>
+                </p:column>
+                <p:column headerText="Product Name">
+                    <h:outputText value="#{product.productName}"></h:outputText>
+                </p:column>
+                <p:column headerText="Change" >
+                    <p:commandButton title="Edit Product" action="#{productList.goToEditProduct()}" >
+                        <f:setPropertyActionListener value="#{product.productID}" target="#{productList.selectedProductDTO}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="Delete">
+                    <p:commandButton title="Delete Tenant" action="#{productList.delete()}" >
+                        <f:setPropertyActionListener value="#{product.productID}" target="#{productList.selectedProductDTO}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+    
+</ui:composition>
